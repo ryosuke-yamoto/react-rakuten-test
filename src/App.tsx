@@ -1,12 +1,19 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from 'react';
+import { getRakuten } from './axios/index';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import CategoryItems from './pages/CategoryItems';
 
 function App() {
+  useEffect(() => {
+    getRakuten();
+  }, []);
+
   return (
-    <div>
-      楽天API練習するよ    
-    </div>
+    <Router>
+      <Switch>
+        <Route path="/category=:categoryNumber" component={CategoryItems} />
+      </Switch>
+    </Router>
   );
 }
 
