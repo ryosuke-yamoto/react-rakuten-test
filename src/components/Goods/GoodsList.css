@@ -1,0 +1,15 @@
+.goods-title {
+  text-decoration: underline;
+  margin-bottom: 30px;
+}
+
+.goods-img {
+  margin-right: 20px;
+}
+
+.goods-wrap {
+  display: flex;
+}
+
+.goods-text-wrap {
+}

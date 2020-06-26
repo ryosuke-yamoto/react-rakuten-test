@@ -1,13 +1,14 @@
 import React from 'react';
 import Header from '../components/Header';
-import ItemList from '../components/ItemList';
+import GoodsWrap from '../components/Goods/GoodsWrap';
+import Layout from '../components/Layout';
 
 const CategoryItems = () => {
   return (
-    <React.Fragment>
+    <Layout>
       <Header />
-      <ItemList />
-    </React.Fragment>
+      <GoodsWrap />
+    </Layout>
     //   <Sidebar />
   );
 };

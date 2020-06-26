@@ -1,0 +1,26 @@
+.headerWrap {
+  padding: 30px;
+  background-color: #fff;
+  margin-bottom: 20px;
+}
+
+.headerNav {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.appTitle {
+  font-size: 25px;
+}
+
+.buttonGroup {
+  width: 100%;
+  margin: 0 auto;
+  display: inline-flex;
+  justify-content: space-around;
+}
+
+.category-button {
+  display: block;
+}
