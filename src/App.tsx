@@ -11,7 +11,7 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/category=:categoryNumber" component={CategoryItems} />
+        <Route path="/" component={CategoryItems} />
       </Switch>
     </Router>
   );
