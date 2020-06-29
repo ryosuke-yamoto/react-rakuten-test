@@ -1,6 +1,11 @@
 import React from 'react';
+import { Goods } from '../../services/Models';
 
-const GoodsTitle = () => {
+interface GoodsTitleProps {
+  goods: Goods[];
+}
+
+const GoodsTitle: React.FC<GoodsTitleProps> = ({ goods }) => {
   return (
     <div>
       <h1>「」の商品</h1>

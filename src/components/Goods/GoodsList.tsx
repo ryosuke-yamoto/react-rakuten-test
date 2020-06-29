@@ -1,19 +1,30 @@
 import React from 'react';
 import './GoodsList.css';
+import { Goods } from '../../services/Models';
 
-const GoodsList = () => {
+interface GoodsListProps {
+  itemName: string;
+  src: string;
+  caption: string;
+  price: number;
+}
+
+const GoodsList: React.FC<GoodsListProps> = ({
+  itemName,
+  caption,
+  src,
+  price,
+}) => {
+  console.log(itemName);
   return (
     <div>
       <h2 className="goods-title">「」の商品</h2>
       <div className="goods-wrap">
-        <img
-          src="https://www.homepage-tukurikata.com/image/lion.jpg"
-          className="goods-img"
-        />
+        <img src={src} className="goods-img" />
         <div className="goods-text-wrap">
-          <p className="goods-title">タイトル</p>
-          <p className="goods-caption">商品説明</p>
-          <p className="price">値段</p>
+          <p className="goods-title">{itemName}</p>
+          <p className="goods-caption">{caption}</p>
+          <p className="price">{price}</p>
         </div>
       </div>
     </div>

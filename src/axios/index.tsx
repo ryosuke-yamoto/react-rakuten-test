@@ -1,4 +1,5 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
+import { Goods } from '../services/Models';
 
 interface ApiConfig {
   baseURL: string;
@@ -12,24 +13,38 @@ const DEFAULT_APE_CONFIG: ApiConfig = {
 
 const axiosInstance = axios.create(DEFAULT_APE_CONFIG);
 
-const result = escape('+itemPrice');
-
-export const getRakuten = () => {
-  axiosInstance
-    .get('', {
+export const getRakutenAPI = async (genreId: string) => {
+  const sort = escape('+reviewCount');
+  try {
+    const response = await axiosInstance.get('', {
       params: {
         applicationId: '1087097032807635362',
-        genreId: '551177',
-        sort: result,
+        genreId,
+        sort,
+        hits: 5,
       },
-    })
-    .then(function (response) {
-      console.log(response);
-      return response;
-    })
-    .catch(function (error) {
-      console.log(error);
     });
+    return response.data.Items;
+  } catch (error) {
+    console.error(error);
+  }
+  // const sort = escape('+reviewCount');
+  // const result = axiosInstance
+  //   .get('', {
+  //     params: {
+  //       applicationId: '1087097032807635362',
+  //       genreId,
+  //       sort,
+  //     },
+  //   })
+  //   .then(function (response) {
+  //     // console.log(response.data.Items);
+  //     return response.data.Items;
+  //   })
+  //   .catch(function (error) {
+  //     console.log(error);
+  //   });
+  // return result;
 };
 // export const getRakuten = () => {
 //   axios
