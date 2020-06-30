@@ -1,18 +1,23 @@
-import React from 'react';
+import React, { FormEvent, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Form, Col } from 'react-bootstrap';
 import './Header.css';
-import { Link } from 'react-router-dom';
-
-console.log(Button);
+import { Link, useHistory } from 'react-router-dom';
 
 const Header = () => {
+  const [value, setValue] = useState('');
+  const history = useHistory();
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    history.push(`/search/${value}`);
+  };
+
   return (
     <div className="headerWrap">
       <div className="headerNav">
         <h1 className="appTitle">やも天市場</h1>
-        <Form>
+        <Form onSubmit={handleSubmit}>
           <Form.Row className="align-items-center">
             <Col xs="auto">
               <Form.Label htmlFor="inlineFormInput" srOnly>
@@ -22,6 +27,8 @@ const Header = () => {
                 className="mb-2"
                 id="inlineFormInput"
                 placeholder="商品検索"
+                value={value}
+                onChange={(e) => setValue(e.target.value)}
               />
             </Col>
             <Col xs="auto">
