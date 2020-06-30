@@ -15,16 +15,16 @@ interface GoodsWrapProps {
 const GoodsWrap: React.FC<GoodsWrapProps> = ({ goods }) => {
   return (
     <div style={goodsWrap}>
-      <GoodsTitle goods={goods} />
+      <GoodsTitle />
       {goods.map((goodsItem) => {
-        console.log(goodsItem.Item.itemName);
         return (
           <GoodsList
             key={goodsItem.Item.itemName}
             itemName={goodsItem.Item.itemName}
-            src={goodsItem.Item.smallImageUrls[0].imageUrl}
+            src={goodsItem.Item.mediumImageUrls[0].imageUrl}
             caption={goodsItem.Item.itemCaption}
             price={goodsItem.Item.itemPrice}
+            url={goodsItem.Item.itemUrl}
           />
         );
       })}

@@ -1,15 +1,45 @@
 .goods-title {
+  color: black;
   text-decoration: underline;
   margin-bottom: 30px;
 }
 
 .goods-img {
+  width: 40%;
   margin-right: 20px;
 }
 
 .goods-wrap {
   display: flex;
+  width: 60%;
+  height: 250px;
+  margin-top: 30px;
 }
 
 .goods-text-wrap {
+  position: relative;
+  width: 55%;
+}
+
+.goods-title {
+  display: -webkit-box; /* line-clamp を有効にするために指定する */
+  -webkit-box-orient: vertical; /* line-clamp を有効にするために指定する */
+  -webkit-line-clamp: 3; /* コレで折り返し表示する行数を指定する・ココでは3行分表示させる */
+  overflow: hidden; /* ボックスからはみ出た分を非表示にする */
+  width: 100%;
+}
+
+.goods-caption {
+  color: #c0c0c0;
+  display: -webkit-box; /* line-clamp を有効にするために指定する */
+  -webkit-box-orient: vertical; /* line-clamp を有効にするために指定する */
+  -webkit-line-clamp: 3; /* コレで折り返し表示する行数を指定する・ココでは3行分表示させる */
+  overflow: hidden; /* ボックスからはみ出た分を非表示にする */
+  width: 100%;
+}
+
+.goods-price {
+  position: absolute;
+  bottom: 0;
+  color: #c0c0c0;
 }

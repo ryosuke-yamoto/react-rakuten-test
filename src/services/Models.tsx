@@ -23,7 +23,7 @@ export interface Goods {
     itemName: string;
     itemPrice: number;
     itemUrl: string;
-    mediumImageUrls: Array<Object>;
+    mediumImageUrls: Array<{ imageUrl: string }>;
     pointRate: number;
     pointRateEndTime: string;
     pointRateStartTime: string;

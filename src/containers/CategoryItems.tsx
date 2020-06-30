@@ -30,7 +30,7 @@ const CategoryItemsContainer: React.FC<CategoryItemsContainerProps> = ({
 
   useEffect(() => {
     getGoodsWithAPI();
-  }, []);
+  }, [param.categoryId]);
 
   return <CategoryItems goods={goods} />;
 };

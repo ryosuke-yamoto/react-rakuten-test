@@ -7,6 +7,7 @@ interface GoodsListProps {
   src: string;
   caption: string;
   price: number;
+  url: string;
 }
 
 const GoodsList: React.FC<GoodsListProps> = ({
@@ -14,18 +15,17 @@ const GoodsList: React.FC<GoodsListProps> = ({
   caption,
   src,
   price,
+  url,
 }) => {
-  console.log(itemName);
   return (
-    <div>
-      <h2 className="goods-title">「」の商品</h2>
-      <div className="goods-wrap">
-        <img src={src} className="goods-img" />
-        <div className="goods-text-wrap">
-          <p className="goods-title">{itemName}</p>
-          <p className="goods-caption">{caption}</p>
-          <p className="price">{price}</p>
-        </div>
+    <div className="goods-wrap">
+      <img src={src} className="goods-img" />
+      <div className="goods-text-wrap">
+        <a href={url} className="goods-title">
+          {itemName}
+        </a>
+        <p className="goods-caption">{caption}</p>
+        <p className="goods-price">（値段）{price}円</p>
       </div>
     </div>
   );

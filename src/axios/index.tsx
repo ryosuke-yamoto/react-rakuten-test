@@ -24,6 +24,7 @@ export const getRakutenAPI = async (genreId: string) => {
         hits: 5,
       },
     });
+    console.log(response.data.Items);
     return response.data.Items;
   } catch (error) {
     console.error(error);
