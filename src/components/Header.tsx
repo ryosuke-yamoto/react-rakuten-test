@@ -55,8 +55,8 @@ const Header = () => {
         <Link to="/category/200162">
           <Button variant="outline-danger">本・雑誌・コミック</Button>{' '}
         </Link>
-        <Link to="/category/101114">
-          <Button variant="outline-info">車・バイク</Button>{' '}
+        <Link to="/category/100026">
+          <Button variant="outline-info">パソコン・周辺機器</Button>{' '}
         </Link>
         <Link to="/category/558929">
           <Button variant="outline-dark">腕時計</Button>

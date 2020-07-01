@@ -1,0 +1,25 @@
+.sidebar-wrap {
+  width: 40%;
+  text-align: center;
+  padding: 20px;
+  border-left: 1px solid #ff9933;
+}
+
+.ranking-list-wrap {
+  margin-top: 30px;
+}
+
+.ranking-item-title {
+  display: -webkit-box; /* line-clamp を有効にするために指定する */
+  -webkit-box-orient: vertical; /* line-clamp を有効にするために指定する */
+  -webkit-line-clamp: 2; /* コレで折り返し表示する行数を指定する・ココでは3行分表示させる */
+  overflow: hidden; /* ボックスからはみ出た分を非表示にする */
+  width: 100%;
+  color: #c0c0c0;
+  text-decoration-line: underline;
+  margin-bottom: 15px;
+}
+
+.ranking-item-wrap {
+  margin-top: 30px;
+}

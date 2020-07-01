@@ -2,11 +2,8 @@ import React from 'react';
 import GoodsList from './GoodsList';
 import GoodsTitle from './GoodsTitle';
 import { Goods } from '../../services/Models';
-
-const goodsWrap = {
-  backgroundColor: '#fff',
-  padding: '20px',
-};
+import SidebarContainer from '../SIidebar/SidebarContainer';
+import './GoodsWrap.css';
 
 interface GoodsWrapProps {
   goods: Goods[];
@@ -14,20 +11,25 @@ interface GoodsWrapProps {
 
 const GoodsWrap: React.FC<GoodsWrapProps> = ({ goods }) => {
   return (
-    <div style={goodsWrap}>
+    <div className="goodsWrap">
       <GoodsTitle />
-      {goods.map((goodsItem) => {
-        return (
-          <GoodsList
-            key={goodsItem.Item.itemName}
-            itemName={goodsItem.Item.itemName}
-            src={goodsItem.Item.mediumImageUrls[0].imageUrl}
-            caption={goodsItem.Item.itemCaption}
-            price={goodsItem.Item.itemPrice}
-            url={goodsItem.Item.itemUrl}
-          />
-        );
-      })}
+      <div className="flexWrap">
+        <div className="goods-list-wrap">
+          {goods.map((goodsItem) => {
+            return (
+              <GoodsList
+                key={goodsItem.Item.itemName}
+                itemName={goodsItem.Item.itemName}
+                src={goodsItem.Item.mediumImageUrls[0].imageUrl}
+                caption={goodsItem.Item.itemCaption}
+                price={goodsItem.Item.itemPrice}
+                url={goodsItem.Item.itemUrl}
+              />
+            );
+          })}
+        </div>
+        <SidebarContainer />
+      </div>
     </div>
   );
 };

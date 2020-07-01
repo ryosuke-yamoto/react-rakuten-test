@@ -1,0 +1,12 @@
+.goodsWrap {
+  background-color: #fff;
+  padding: 20px;
+}
+
+.flexWrap {
+  display: flex;
+}
+
+.goods-list-wrap {
+  width: 90%;
+}

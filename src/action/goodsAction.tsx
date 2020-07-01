@@ -1,4 +1,4 @@
-import { GET_GOODS } from './goodsActionConstant';
+import { GET_GOODS, GET_RANKING_GOODS } from './goodsActionConstant';
 import { Goods } from '../services/Models';
 
 export const getGoods = (goods: Goods[]) => ({
@@ -8,4 +8,13 @@ export const getGoods = (goods: Goods[]) => ({
   },
 });
 
-export type ActionType = ReturnType<typeof getGoods>;
+export const getRankingGoods = (rankingGoods: Goods[]) => ({
+  type: GET_RANKING_GOODS as typeof GET_RANKING_GOODS,
+  payload: {
+    rankingGoods,
+  },
+});
+
+export type ActionType =
+  | ReturnType<typeof getGoods>
+  | ReturnType<typeof getRankingGoods>;
