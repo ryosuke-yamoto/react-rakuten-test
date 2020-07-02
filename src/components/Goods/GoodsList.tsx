@@ -26,12 +26,6 @@ const SampleNextArrow: any = (props: any) => {
   );
 };
 
-type arrow = {
-  className: any;
-  style: any;
-  onClick: any;
-};
-
 const SamplePrevArrow = (props: any) => {
   console.log(props);
   const { className, style, onClick } = props;
@@ -51,8 +45,6 @@ const GoodsList: React.FC<GoodsListProps> = ({
   price,
   url,
 }) => {
-  console.log(Slider);
-  // const imgSrc = src;
   const makeCarouselSrc = () => {
     let src2 = src;
     if (!src[1] && !src[2]) {
@@ -60,13 +52,9 @@ const GoodsList: React.FC<GoodsListProps> = ({
     } else if (!src[1] || !src[2]) {
       src2 = [...src, { imageUrl: img }];
     }
-    // if (!src[2]) {
-    //   src[2].imageUrl = '../../img/img/no-image.png';
-    // }
     return src2;
   };
   const src2 = makeCarouselSrc();
-  console.log(src2);
   const settings = {
     customPaging: function (i: number) {
       return (
@@ -75,7 +63,6 @@ const GoodsList: React.FC<GoodsListProps> = ({
         </a>
       );
     },
-    // dots: true,
     dotsClass: 'slick-dots slick-thumb',
     infinite: true,
     speed: 500,
@@ -86,8 +73,6 @@ const GoodsList: React.FC<GoodsListProps> = ({
   };
   return (
     <div className="goods-wrap">
-      {/* <img src={src[0].imageUrl} className="goods-img" />
-      {src[1] ? <img src={src[1].imageUrl} /> : <img src={img} />} */}
       <Slider {...settings} className="goods-img-wrap">
         <div>
           <img src={src2[0].imageUrl} className="goods-img" />

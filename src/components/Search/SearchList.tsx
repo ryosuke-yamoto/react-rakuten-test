@@ -1,15 +1,42 @@
 import React from 'react';
 import '../Goods/GoodsList.css';
 import { Goods } from '../../services/Models';
-import '../Goods/GoodsList.css';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import Slider from 'react-slick';
+import img from '../../img/no-image-copy.png';
 
 interface SearchListProps {
   itemName: string;
-  src: string;
+  src: any;
   caption: string;
   price: number;
   url: string;
 }
+
+const SampleNextArrow: any = (props: any) => {
+  console.log(props);
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{ ...style, display: 'block', background: '#ff9933' }}
+      onClick={onClick}
+    />
+  );
+};
+
+const SamplePrevArrow = (props: any) => {
+  console.log(props);
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{ ...style, display: 'block', background: '#ff9933' }}
+      onClick={onClick}
+    />
+  );
+};
 
 const SearchList: React.FC<SearchListProps> = ({
   itemName,
@@ -18,9 +45,45 @@ const SearchList: React.FC<SearchListProps> = ({
   price,
   url,
 }) => {
+  const makeCarouselSrc = () => {
+    let src2 = src;
+    if (!src[1] && !src[2]) {
+      src2 = [...src, { imageUrl: img }, { imageUrl: img }];
+    } else if (!src[1] || !src[2]) {
+      src2 = [...src, { imageUrl: img }];
+    }
+    return src2;
+  };
+  const src2 = makeCarouselSrc();
+  const settings = {
+    customPaging: function (i: number) {
+      return (
+        <a>
+          <img src={src2[i].imageUrl} />
+        </a>
+      );
+    },
+    dotsClass: 'slick-dots slick-thumb',
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    nextArrow: <SampleNextArrow />,
+    prevArrow: <SamplePrevArrow />,
+  };
   return (
     <div className="goods-wrap">
-      <img src={src} className="goods-img" />
+      <Slider {...settings} className="goods-img-wrap">
+        <div>
+          <img src={src2[0].imageUrl} className="goods-img" />
+        </div>
+        <div>
+          <img src={src2[1].imageUrl} className="goods-img" />
+        </div>
+        <div>
+          <img src={src2[2].imageUrl} className="goods-img" />
+        </div>
+      </Slider>
       <div className="goods-text-wrap">
         <a href={url} className="goods-title">
           {itemName}
