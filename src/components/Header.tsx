@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Form, Col } from 'react-bootstrap';
 import './Header.css';
 import { Link, useHistory } from 'react-router-dom';
+import Slider from 'react-slick';
 
 const Header = () => {
   const [value, setValue] = useState('');

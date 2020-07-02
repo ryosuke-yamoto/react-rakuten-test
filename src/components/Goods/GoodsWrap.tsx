@@ -20,10 +20,11 @@ const GoodsWrap: React.FC<GoodsWrapProps> = ({ goods }) => {
               <GoodsList
                 key={goodsItem.Item.itemName}
                 itemName={goodsItem.Item.itemName}
-                src={goodsItem.Item.mediumImageUrls[0].imageUrl}
+                src={goodsItem.Item.mediumImageUrls}
                 caption={goodsItem.Item.itemCaption}
                 price={goodsItem.Item.itemPrice}
                 url={goodsItem.Item.itemUrl}
+                // {...props}
               />
             );
           })}

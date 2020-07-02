@@ -1,14 +1,48 @@
 import React from 'react';
 import './GoodsList.css';
 import { Goods } from '../../services/Models';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import Slider from 'react-slick';
+import img from '../../img/no-image-copy.png';
 
 interface GoodsListProps {
   itemName: string;
-  src: string;
+  src: any;
   caption: string;
   price: number;
   url: string;
 }
+
+const SampleNextArrow: any = (props: any) => {
+  console.log(props);
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{ ...style, display: 'block', background: '#ff9933' }}
+      onClick={onClick}
+    />
+  );
+};
+
+type arrow = {
+  className: any;
+  style: any;
+  onClick: any;
+};
+
+const SamplePrevArrow = (props: any) => {
+  console.log(props);
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{ ...style, display: 'block', background: '#ff9933' }}
+      onClick={onClick}
+    />
+  );
+};
 
 const GoodsList: React.FC<GoodsListProps> = ({
   itemName,
@@ -17,9 +51,54 @@ const GoodsList: React.FC<GoodsListProps> = ({
   price,
   url,
 }) => {
+  console.log(Slider);
+  // const imgSrc = src;
+  const makeCarouselSrc = () => {
+    let src2 = src;
+    if (!src[1] && !src[2]) {
+      src2 = [...src, { imageUrl: img }, { imageUrl: img }];
+    } else if (!src[1] || !src[2]) {
+      src2 = [...src, { imageUrl: img }];
+    }
+    // if (!src[2]) {
+    //   src[2].imageUrl = '../../img/img/no-image.png';
+    // }
+    return src2;
+  };
+  const src2 = makeCarouselSrc();
+  console.log(src2);
+  const settings = {
+    customPaging: function (i: number) {
+      return (
+        <a>
+          <img src={src2[i].imageUrl} />
+        </a>
+      );
+    },
+    // dots: true,
+    dotsClass: 'slick-dots slick-thumb',
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    nextArrow: <SampleNextArrow />,
+    prevArrow: <SamplePrevArrow />,
+  };
   return (
     <div className="goods-wrap">
-      <img src={src} className="goods-img" />
+      {/* <img src={src[0].imageUrl} className="goods-img" />
+      {src[1] ? <img src={src[1].imageUrl} /> : <img src={img} />} */}
+      <Slider {...settings} className="goods-img-wrap">
+        <div>
+          <img src={src2[0].imageUrl} className="goods-img" />
+        </div>
+        <div>
+          <img src={src2[1].imageUrl} className="goods-img" />
+        </div>
+        <div>
+          <img src={src2[2].imageUrl} className="goods-img" />
+        </div>
+      </Slider>
       <div className="goods-text-wrap">
         <a href={url} className="goods-title">
           {itemName}
