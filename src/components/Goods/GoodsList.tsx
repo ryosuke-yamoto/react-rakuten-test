@@ -5,6 +5,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Slider from 'react-slick';
 import img from '../../img/no-image-copy.png';
+import { listImgMaxNum } from '../config';
 
 interface GoodsListProps {
   itemName: string;
@@ -71,10 +72,33 @@ const GoodsList: React.FC<GoodsListProps> = ({
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
   };
+  let imgs = [];
+  for (let i = 0; i < listImgMaxNum; i++) {
+    imgs.push(
+      <div>
+        <img src={src2[i].imageUrl} className="goods-img" />
+      </div>
+    );
+    // return [...imgs];
+  }
+  console.log(imgs);
   return (
     <div className="goods-wrap">
       <Slider {...settings} className="goods-img-wrap">
-        <div>
+        {imgs}
+        {/* {() => {
+          let imgs = [];
+          for (let i = 0; i < listImgMaxNum; i++) {
+            imgs.push(
+              <div>
+                <img src={src2[i].imageUrl} className="goods-img" />
+              </div>
+            );
+            return [...imgs];
+          }
+        }}
+        () */}
+        {/* <div>
           <img src={src2[0].imageUrl} className="goods-img" />
         </div>
         <div>
@@ -82,7 +106,7 @@ const GoodsList: React.FC<GoodsListProps> = ({
         </div>
         <div>
           <img src={src2[2].imageUrl} className="goods-img" />
-        </div>
+        </div> */}
       </Slider>
       <div className="goods-text-wrap">
         <a href={url} className="goods-title">
