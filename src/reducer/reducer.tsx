@@ -2,7 +2,11 @@ import { combineReducers, Reducer } from 'redux';
 import * as Model from '../services/Models';
 import { AxiosError } from 'axios';
 import { ActionType } from '../action/goodsAction';
-import { GET_GOODS, GET_RANKING_GOODS } from '../action/goodsActionConstant';
+import {
+  GET_GOODS,
+  GET_RANKING_GOODS,
+  GET_RANKING_SORT_AGE,
+} from '../action/goodsActionConstant';
 
 export interface GoodsState {
   goods: Model.Goods[];
@@ -10,9 +14,17 @@ export interface GoodsState {
   error?: AxiosError | null;
 }
 
+export interface SortState {
+  age: string;
+}
+
 export const initialState = {
   goods: [],
   rankingGoods: [],
+};
+
+export const sortInitialState = {
+  age: '10',
 };
 
 export const GoodsReducer: Reducer<GoodsState, ActionType> = (
@@ -34,3 +46,28 @@ export const GoodsReducer: Reducer<GoodsState, ActionType> = (
       return state;
   }
 };
+
+export const RankingSortReducer: Reducer<SortState, ActionType> = (
+  state: SortState = sortInitialState,
+  action: ActionType
+): SortState => {
+  switch (action.type) {
+    case GET_RANKING_SORT_AGE:
+      return {
+        ...state,
+        age: action.payload.age,
+      };
+    default:
+      return {
+        ...state,
+        age: '',
+      };
+  }
+};
+
+const reducer = combineReducers({
+  GoodsReducer,
+  RankingSortReducer,
+});
+
+export default reducer;

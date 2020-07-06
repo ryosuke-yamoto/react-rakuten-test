@@ -1,0 +1,35 @@
+.modal-button {
+  text-align: center;
+}
+
+.dropdown-item {
+  text-align: center;
+  padding: 0;
+}
+
+.select-content-button {
+  width: 100%;
+  height: 100%;
+}
+
+.content-row {
+  height: 100px;
+  max-height: 100%;
+}
+
+.content-row-first {
+  width: 90%;
+  margin: 0 auto 20px auto;
+}
+
+.content-col {
+  padding: 0;
+}
+
+.content-col-second {
+  max-height: 100%;
+}
+
+.content-p {
+  margin: 0;
+}

@@ -1,4 +1,8 @@
-import { GET_GOODS, GET_RANKING_GOODS } from './goodsActionConstant';
+import {
+  GET_GOODS,
+  GET_RANKING_GOODS,
+  GET_RANKING_SORT_AGE,
+} from './goodsActionConstant';
 import { Goods } from '../services/Models';
 
 export const getGoods = (goods: Goods[]) => ({
@@ -15,6 +19,14 @@ export const getRankingGoods = (rankingGoods: Goods[]) => ({
   },
 });
 
+export const getRankingSortAge = (age: string) => ({
+  type: GET_RANKING_SORT_AGE as typeof GET_RANKING_SORT_AGE,
+  payload: {
+    age,
+  },
+});
+
 export type ActionType =
   | ReturnType<typeof getGoods>
-  | ReturnType<typeof getRankingGoods>;
+  | ReturnType<typeof getRankingGoods>
+  | ReturnType<typeof getRankingSortAge>;

@@ -18,7 +18,7 @@ const GoodsWrap: React.FC<GoodsWrapProps> = ({ goods }) => {
           {goods.map((goodsItem) => {
             return (
               <GoodsList
-                key={goodsItem.Item.itemName}
+                key={goodsItem.Item.itemCode}
                 itemName={goodsItem.Item.itemName}
                 src={goodsItem.Item.mediumImageUrls}
                 caption={goodsItem.Item.itemCaption}
