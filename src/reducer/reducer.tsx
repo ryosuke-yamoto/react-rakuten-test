@@ -6,16 +6,21 @@ import {
   GET_GOODS,
   GET_RANKING_GOODS,
   GET_RANKING_SORT_AGE,
+  LOGGED_IN,
 } from '../action/goodsActionConstant';
 
 export interface GoodsState {
+  Goods: {
+    goods: Model.Goods[];
+    rankingGoods: Model.Goods[];
+    error?: AxiosError | null;
+  };
+}
+
+interface GoodStateType {
   goods: Model.Goods[];
   rankingGoods: Model.Goods[];
   error?: AxiosError | null;
-}
-
-export interface SortState {
-  age: string;
 }
 
 export const initialState = {
@@ -23,14 +28,10 @@ export const initialState = {
   rankingGoods: [],
 };
 
-export const sortInitialState = {
-  age: '10',
-};
-
-export const GoodsReducer: Reducer<GoodsState, ActionType> = (
-  state: GoodsState = initialState,
+export const GoodsReducer: Reducer<GoodStateType, ActionType> = (
+  state: GoodStateType = initialState,
   action: ActionType
-): GoodsState => {
+): GoodStateType => {
   switch (action.type) {
     case GET_GOODS:
       return {
@@ -47,10 +48,24 @@ export const GoodsReducer: Reducer<GoodsState, ActionType> = (
   }
 };
 
-export const RankingSortReducer: Reducer<SortState, ActionType> = (
-  state: SortState = sortInitialState,
+export interface SortState {
+  rankingSort: {
+    age: string;
+  };
+}
+
+interface SortStateType {
+  age: string;
+}
+
+export const sortInitialState = {
+  age: '10',
+};
+
+export const RankingSortReducer: Reducer<SortStateType, ActionType> = (
+  state: SortStateType = sortInitialState,
   action: ActionType
-): SortState => {
+): SortStateType => {
   switch (action.type) {
     case GET_RANKING_SORT_AGE:
       return {
@@ -58,16 +73,37 @@ export const RankingSortReducer: Reducer<SortState, ActionType> = (
         age: action.payload.age,
       };
     default:
+      return state;
+  }
+};
+
+export interface LoggedState {
+  logIn: boolean;
+}
+
+export const LoggedInInitialState = {
+  logIn: false,
+};
+
+export const LoggedInReducer: Reducer<LoggedState, ActionType> = (
+  state: LoggedState = LoggedInInitialState,
+  action: ActionType
+): LoggedState => {
+  switch (action.type) {
+    case LOGGED_IN:
       return {
         ...state,
-        age: '',
+        logIn: !action.payload.logIn,
       };
+    default:
+      return state;
   }
 };
 
 const reducer = combineReducers({
-  GoodsReducer,
-  RankingSortReducer,
+  Goods: GoodsReducer,
+  rankingSort: RankingSortReducer,
+  logged: LoggedInReducer,
 });
 
 export default reducer;

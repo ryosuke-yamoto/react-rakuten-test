@@ -6,9 +6,10 @@ import { Param } from './SidebarContainer';
 
 interface SidebarProps {
   rankingGoods: Goods[];
+  age: string;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ rankingGoods }) => {
+const Sidebar: React.FC<SidebarProps> = ({ rankingGoods, age }) => {
   const params: Param = useParams();
 
   const titleUnderline = () => {
@@ -41,23 +42,19 @@ const Sidebar: React.FC<SidebarProps> = ({ rankingGoods }) => {
   };
   const titleStyle = titleUnderline();
   const titleMake = () => {
-    switch (params.categoryId) {
-      case '566382':
-        return '「おもちゃ」';
-      case '101070':
-        return '「スポーツ・アウトドア」';
-      case '562637':
-        return '「家電」';
-      case '551167':
-        return '「スイーツ・お菓子」';
-      case '200162':
-        return '「本・雑誌・コミック」';
-      case '100026':
-        return '「パソコン・周辺機器」';
-      case '558929':
-        return '「腕時計」';
+    switch (age) {
+      case '10':
+        return '「10代」';
+      case '20':
+        return '「20代」';
+      case '30':
+        return '「30代」';
+      case '40':
+        return '「40代」';
+      case '50':
+        return '「50代」';
       default:
-        return '総合';
+        return '「20代」';
     }
   };
   const title = titleMake();

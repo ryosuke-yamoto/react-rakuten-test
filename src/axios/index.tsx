@@ -21,7 +21,7 @@ export const getRakutenAPI = async (genreId: string) => {
         applicationId: '1087097032807635362',
         genreId,
         sort,
-        hits: 5,
+        hits: 10,
       },
     });
     console.log(response.data.Items);
@@ -46,13 +46,18 @@ export const getSearchedRakutenAPI = async (keyword: string) => {
     console.error(error);
   }
 };
-export const getRankingRakutenAPI = async (genreId: string) => {
+export const getRankingRakutenAPI = async (
+  // genreId: string,
+  age: string = '10'
+) => {
   try {
     const response = await axiosInstance.get('Ranking/20170628?', {
       params: {
         applicationId: '1087097032807635362',
-        genreId,
-        period: 'realtime',
+        // genreId,
+        age,
+        // sex: 0,
+        // period: 'realtime',
         hits: 5,
       },
     });

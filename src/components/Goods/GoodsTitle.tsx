@@ -24,6 +24,8 @@ const GoodsTitle: React.FC = () => {
         return '本・雑誌・コミック';
       case '101114':
         return '車・バイク';
+      case '100026':
+        return 'パソコン・周辺機器';
       case '558929':
         return '腕時計';
       default:

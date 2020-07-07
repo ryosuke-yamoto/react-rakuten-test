@@ -10,10 +10,24 @@ import Container from 'react-bootstrap/Container';
 import { useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import { getRankingSortAge } from '../action/goodsAction';
+import { getRankingSortAge, loggedIn } from '../action/goodsAction';
 
-const SelectAgeModalComponent = (props: any) => {
+interface SelectAgeModalComponentProps {
+  getRankingSortAge: any;
+  onHide: () => void;
+  show: boolean;
+}
+
+const SelectAgeModalComponent: React.FC<SelectAgeModalComponentProps> = ({
+  getRankingSortAge,
+  ...props
+}) => {
+  console.log(props);
   const [age, setAge] = useState('');
+  const handleClick = () => {
+    props.onHide();
+    getRankingSortAge(age);
+  };
   return (
     <Modal
       {...props}
@@ -60,23 +74,46 @@ const SelectAgeModalComponent = (props: any) => {
         <Dropdown.Item eventKey="50" as="button" onClick={() => setAge('50')}>
           50代
         </Dropdown.Item>
-        <Dropdown.Item eventKey="60" as="button" onClick={() => setAge('60')}>
+        {/* <Dropdown.Item eventKey="60" as="button" onClick={() => setAge('60')}>
           60代
-        </Dropdown.Item>
+        </Dropdown.Item> */}
       </DropdownButton>
       <Modal.Footer>
-        <Button onClick={props.onHide}>次へ</Button>
+        <Button onClick={handleClick} disabled={age == ''}>
+          次へ
+        </Button>
       </Modal.Footer>
     </Modal>
   );
 };
 
-export const SelectContentsModalComponent = (props: any) => {
+const mapDispatchToProps = (dispatch: Dispatch) => {
+  return {
+    getRankingSortAge: (age: string) => dispatch(getRankingSortAge(age)),
+    loggedIn: () => dispatch(loggedIn()),
+    // getGoods: (goods: Goods[]) => dispatch(getGoods(goods)),
+  };
+};
+
+const mapStateToProps = (state: any) => {
+  return {
+    logIn: state.logged.logIn,
+    age: state.rankingSort.age,
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SelectAgeModalComponent);
+
+const SelectContentsModalComponent = (props: any) => {
   const [contents, setContents] = useState('');
   const history = useHistory();
   const handleSubmit = () => {
     props.onHide();
     history.push(`/category/${contents}`);
+    props.loggedIn();
   };
   return (
     <Modal
@@ -168,7 +205,9 @@ export const SelectContentsModalComponent = (props: any) => {
         </div>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={handleSubmit}>OK</Button>
+        <Button onClick={handleSubmit} disabled={contents == ''}>
+          OK
+        </Button>
       </Modal.Footer>
     </Modal>
   );
@@ -180,11 +219,7 @@ export const SelectContentsModalComponent = (props: any) => {
 //   }
 // }
 
-const mapDispatchToProps = (dispatch: Dispatch) => {
-  return {
-    getRankingSortAge: (age: string) => dispatch(getRankingSortAge(age)),
-    // getGoods: (goods: Goods[]) => dispatch(getGoods(goods)),
-  };
-};
-
-export default connect(mapDispatchToProps)(SelectAgeModalComponent);
+export const SelectContentsModalComponent2 = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SelectContentsModalComponent);

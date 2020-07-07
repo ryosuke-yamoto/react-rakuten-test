@@ -2,6 +2,7 @@ import {
   GET_GOODS,
   GET_RANKING_GOODS,
   GET_RANKING_SORT_AGE,
+  LOGGED_IN,
 } from './goodsActionConstant';
 import { Goods } from '../services/Models';
 
@@ -26,7 +27,15 @@ export const getRankingSortAge = (age: string) => ({
   },
 });
 
+export const loggedIn = () => ({
+  type: LOGGED_IN as typeof LOGGED_IN,
+  payload: {
+    logIn: false,
+  },
+});
+
 export type ActionType =
   | ReturnType<typeof getGoods>
   | ReturnType<typeof getRankingGoods>
-  | ReturnType<typeof getRankingSortAge>;
+  | ReturnType<typeof getRankingSortAge>
+  | ReturnType<typeof loggedIn>;

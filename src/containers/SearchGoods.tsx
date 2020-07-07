@@ -37,7 +37,7 @@ const SearchGoodsContainer: React.FC<SearchGoodsContainerProps> = ({
 
 const mapStateToProps = (state: GoodsState) => {
   return {
-    searchedGoods: state.goods,
+    searchedGoods: state.Goods.goods,
   };
 };
 

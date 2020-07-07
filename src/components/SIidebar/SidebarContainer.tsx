@@ -16,11 +16,13 @@ export type Param = {
 interface SidebarContainerContainerProps {
   getRankingGoods: (rankingGoods: Goods[]) => void;
   rankingGoods: Goods[];
+  age: string;
 }
 
-const mapStateToProps = (state: GoodsState) => {
+const mapStateToProps = (state: GoodsState & any) => {
   return {
-    rankingGoods: state.rankingGoods,
+    rankingGoods: state.Goods.rankingGoods,
+    age: state.rankingSort.age,
   };
 };
 
@@ -34,16 +36,17 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
 const SidebarContainer: React.FC<SidebarContainerContainerProps> = ({
   getRankingGoods,
   rankingGoods,
+  age,
 }) => {
   const param: Param = useParams();
   console.log(param);
 
   const getRankingGoodsWithAPI = async () => {
-    if (param.keyword) {
-      const RakutenAPIData = await getRankingRakutenAPI('0');
+    if (age) {
+      const RakutenAPIData = await getRankingRakutenAPI(age);
       getRankingGoods(RakutenAPIData);
     } else {
-      const RakutenAPIData = await getRankingRakutenAPI(param.categoryId);
+      const RakutenAPIData = await getRankingRakutenAPI('20');
       getRankingGoods(RakutenAPIData);
     }
   };
@@ -51,7 +54,7 @@ const SidebarContainer: React.FC<SidebarContainerContainerProps> = ({
   useEffect(() => {
     getRankingGoodsWithAPI();
   }, [param.categoryId]);
-  return <Sidebar rankingGoods={rankingGoods} />;
+  return <Sidebar rankingGoods={rankingGoods} age={age} />;
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SidebarContainer);

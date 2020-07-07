@@ -37,7 +37,7 @@ const CategoryItemsContainer: React.FC<CategoryItemsContainerProps> = ({
 
 const mapStateToProps = (state: GoodsState) => {
   return {
-    goods: state.goods,
+    goods: state.Goods.goods,
   };
 };
 
