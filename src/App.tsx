@@ -16,11 +16,12 @@ import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 
 interface AppProps {
-  logIn?: boolean;
+  login?: boolean;
 }
 
-const App: React.FC<AppProps> = ({ logIn }) => {
-  const [selectAgemodalShow, setSelectAgeModalShow] = useState(true);
+const App: React.FC<AppProps> = ({ login }) => {
+  const initialState = login === false ? true : false;
+  const [selectAgemodalShow, setSelectAgeModalShow] = useState(initialState);
   const [selectContentsModalShow, setSelectContentsMShow] = useState(false);
 
   const SelectAgeModalHide = () => {
@@ -31,7 +32,7 @@ const App: React.FC<AppProps> = ({ logIn }) => {
   return (
     <Router>
       <Switch>
-        {logIn == false ? (
+        {login == false ? (
           <Route exact from="/" component={SelectAgeModalComponent} />
         ) : (
           <Redirect exact from="/" to="/category/566382" />
@@ -63,7 +64,7 @@ const App: React.FC<AppProps> = ({ logIn }) => {
 
 const mapStateToProps = (state: any) => {
   return {
-    logIn: state.logged.logIn,
+    login: state.logged.login,
   };
 };
 

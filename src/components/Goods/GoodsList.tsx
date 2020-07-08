@@ -75,7 +75,7 @@ const GoodsList: React.FC<GoodsListProps> = ({
   let imgs = [];
   for (let i = 0; i < listImgMaxNum; i++) {
     imgs.push(
-      <div>
+      <div key={i}>
         <img src={src2[i].imageUrl} className="goods-img" />
       </div>
     );

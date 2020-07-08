@@ -8,6 +8,8 @@ import {
   GET_RANKING_SORT_AGE,
   LOGGED_IN,
 } from '../action/goodsActionConstant';
+import { persistReducer, persistStore } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 
 export interface GoodsState {
   Goods: {
@@ -78,11 +80,11 @@ export const RankingSortReducer: Reducer<SortStateType, ActionType> = (
 };
 
 export interface LoggedState {
-  logIn: boolean;
+  login: boolean;
 }
 
 export const LoggedInInitialState = {
-  logIn: false,
+  login: false,
 };
 
 export const LoggedInReducer: Reducer<LoggedState, ActionType> = (
@@ -93,7 +95,7 @@ export const LoggedInReducer: Reducer<LoggedState, ActionType> = (
     case LOGGED_IN:
       return {
         ...state,
-        logIn: !action.payload.logIn,
+        login: !action.payload.login,
       };
     default:
       return state;
@@ -106,4 +108,18 @@ const reducer = combineReducers({
   logged: LoggedInReducer,
 });
 
-export default reducer;
+// export default reducer;
+
+//stateの永続化
+// 永続化の設定
+const persistConfig = {
+  key: 'root', // Storageに保存されるキー名を指定する
+  storage, // 保存先としてlocalStorageがここで設定される
+  whitelist: ['logged'], // Stateは`todos`のみStorageに保存する
+  // blacklist: ['visibilityFilter'] // `visibilityFilter`は保存しない
+};
+
+// 永続化設定されたReducerとして定義
+const persistedReducer = persistReducer(persistConfig, reducer);
+
+export default persistedReducer;

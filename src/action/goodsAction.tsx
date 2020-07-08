@@ -30,7 +30,7 @@ export const getRankingSortAge = (age: string) => ({
 export const loggedIn = () => ({
   type: LOGGED_IN as typeof LOGGED_IN,
   payload: {
-    logIn: false,
+    login: false,
   },
 });
 

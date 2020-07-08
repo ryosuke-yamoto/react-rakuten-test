@@ -13,20 +13,22 @@ import { Dispatch } from 'redux';
 import { getRankingSortAge, loggedIn } from '../action/goodsAction';
 
 interface SelectAgeModalComponentProps {
-  getRankingSortAge: any;
+  getrankingsortage: any;
   onHide: () => void;
+  loggedIn: any;
   show: boolean;
 }
 
 const SelectAgeModalComponent: React.FC<SelectAgeModalComponentProps> = ({
-  getRankingSortAge,
+  getrankingsortage,
+  loggedIn,
   ...props
 }) => {
   console.log(props);
   const [age, setAge] = useState('');
   const handleClick = () => {
     props.onHide();
-    getRankingSortAge(age);
+    getrankingsortage(age);
   };
   return (
     <Modal
@@ -89,15 +91,14 @@ const SelectAgeModalComponent: React.FC<SelectAgeModalComponentProps> = ({
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
-    getRankingSortAge: (age: string) => dispatch(getRankingSortAge(age)),
+    getrankingsortage: (age: string) => dispatch(getRankingSortAge(age)),
     loggedIn: () => dispatch(loggedIn()),
-    // getGoods: (goods: Goods[]) => dispatch(getGoods(goods)),
   };
 };
 
 const mapStateToProps = (state: any) => {
   return {
-    logIn: state.logged.logIn,
+    login: state.logged.logIn,
     age: state.rankingSort.age,
   };
 };
@@ -107,13 +108,17 @@ export default connect(
   mapDispatchToProps
 )(SelectAgeModalComponent);
 
-const SelectContentsModalComponent = (props: any) => {
+const SelectContentsModalComponent = ({
+  getrankingsortage,
+  loggedIn,
+  ...props
+}: any) => {
   const [contents, setContents] = useState('');
   const history = useHistory();
   const handleSubmit = () => {
     props.onHide();
     history.push(`/category/${contents}`);
-    props.loggedIn();
+    loggedIn();
   };
   return (
     <Modal
