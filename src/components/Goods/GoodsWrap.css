@@ -1,12 +1,15 @@
 .goodsWrap {
   background-color: #fff;
-  padding: 20px;
+  /* padding: 20px; */
 }
 
-.flexWrap {
+/* /* .flexWrap {
   display: flex;
-}
+}/ */
 
-.goods-list-wrap {
-  width: 70%;
+@media screen and (min-width: 768px) {
+  /*　画面サイズが480pxからはここを読み込む　*/
+  .goods-list-wrap {
+    border-right: 1px solid #ff9933;
+  }
 }

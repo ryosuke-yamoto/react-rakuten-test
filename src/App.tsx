@@ -14,6 +14,7 @@ import SelectAgeModalComponent, {
 } from './Modal/ModalComponent';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 interface AppProps {
   login?: boolean;

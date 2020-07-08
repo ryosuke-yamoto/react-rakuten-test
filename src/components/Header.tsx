@@ -1,7 +1,6 @@
 import React, { FormEvent, useState } from 'react';
-import Button from 'react-bootstrap/Button';
+import { Button, Row, Col, Container, Form } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Form, Col } from 'react-bootstrap';
 import './Header.css';
 import { Link, useHistory } from 'react-router-dom';
 import Slider from 'react-slick';
@@ -40,28 +39,36 @@ const Header = () => {
           </Form.Row>
         </Form>
       </div>
+
       <div className="buttonGroup">
-        <Link to="/category/566382">
-          <Button variant="outline-primary">おもちゃ</Button>{' '}
-        </Link>
-        <Link to="/category/101070">
-          <Button variant="outline-secondary">スポーツ・アウトドア</Button>{' '}
-        </Link>
-        <Link to="/category/562637">
-          <Button variant="outline-success">家電</Button>{' '}
-        </Link>
-        <Link to="/category/551167">
-          <Button variant="outline-warning">スイーツ・お菓子</Button>{' '}
-        </Link>
-        <Link to="/category/200162">
-          <Button variant="outline-danger">本・雑誌・コミック</Button>{' '}
-        </Link>
-        <Link to="/category/100026">
-          <Button variant="outline-info">パソコン・周辺機器</Button>{' '}
-        </Link>
-        <Link to="/category/558929">
-          <Button variant="outline-dark">腕時計</Button>
-        </Link>
+        <div className="first-button-group">
+          <Link to="/category/566382" className="button">
+            <Button variant="outline-primary">おもちゃ</Button>{' '}
+          </Link>
+
+          <Link to="/category/101070" className="button">
+            <Button variant="outline-secondary">スポーツ・アウトドア</Button>{' '}
+          </Link>
+
+          <Link to="/category/562637" className="button">
+            <Button variant="outline-success">家電</Button>{' '}
+          </Link>
+        </div>
+        <div className="second-button-group">
+          <Link to="/category/551167" className="button">
+            <Button variant="outline-warning">スイーツ・お菓子</Button>{' '}
+          </Link>
+
+          <Link to="/category/200162" className="button">
+            <Button variant="outline-danger">本・雑誌・コミック</Button>{' '}
+          </Link>
+          <Link to="/category/100026" className="button">
+            <Button variant="outline-info">パソコン・周辺機器</Button>{' '}
+          </Link>
+          <Link to="/category/558929" className="button">
+            <Button variant="outline-dark">腕時計</Button>
+          </Link>
+        </div>
       </div>
     </div>
   );

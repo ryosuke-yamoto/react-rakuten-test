@@ -38,7 +38,7 @@ export const getSearchedRakutenAPI = async (keyword: string) => {
         applicationId: '1087097032807635362',
         keyword,
         sort,
-        hits: 5,
+        hits: 10,
       },
     });
     return response.data.Items;
