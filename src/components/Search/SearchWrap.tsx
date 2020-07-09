@@ -27,7 +27,11 @@ const SearchWrap: React.FC<SearchWrapProps> = ({ searchedGoods }) => {
                 <SearchList
                   key={searchedGoodsItem.Item.itemCode}
                   itemName={searchedGoodsItem.Item.itemName}
-                  src={searchedGoodsItem.Item.mediumImageUrls}
+                  src={
+                    searchedGoodsItem.Item.mediumImageUrls
+                      ? searchedGoodsItem.Item.mediumImageUrls
+                      : []
+                  }
                   caption={searchedGoodsItem.Item.itemCaption}
                   price={searchedGoodsItem.Item.itemPrice}
                   url={searchedGoodsItem.Item.itemUrl}

@@ -47,9 +47,11 @@ const SearchList: React.FC<SearchListProps> = ({
 }) => {
   const makeCarouselSrc = () => {
     let src2 = src;
-    if (!src[1] && !src[2]) {
+    if (!src[0]) {
+      src2 = [{ imageUrl: img }, { imageUrl: img }, { imageUrl: img }];
+    } else if (!src[1]) {
       src2 = [...src, { imageUrl: img }, { imageUrl: img }];
-    } else if (!src[1] || !src[2]) {
+    } else if (!src[2]) {
       src2 = [...src, { imageUrl: img }];
     }
     return src2;

@@ -14,7 +14,7 @@ const store: any = createStore(
   composeWithDevTools(applyMiddleware())
 );
 const persistor = persistStore(store);
-// persistor.purge();
+persistor.purge();
 //これを実行すると、Storageに保存された情報がクリアされる
 ReactDOM.render(
   <Provider store={store}>
