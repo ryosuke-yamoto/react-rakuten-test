@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './Header.css';
 import { Link, useHistory } from 'react-router-dom';
 import Slider from 'react-slick';
+import SignNav from './SignNav';
 
 const Header = () => {
   const [value, setValue] = useState('');
@@ -15,6 +16,13 @@ const Header = () => {
 
   return (
     <div className="headerWrap">
+      <Container>
+        <Row>
+          <Col className="span4 offset-8">
+            <SignNav />
+          </Col>
+        </Row>
+      </Container>
       <div className="headerNav">
         <h1 className="appTitle">やも天市場</h1>
         <Form onSubmit={handleSubmit}>

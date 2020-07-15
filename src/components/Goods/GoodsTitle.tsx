@@ -9,7 +9,6 @@ type Params = {
 
 const GoodsTitle: React.FC = () => {
   const params: Params = useParams();
-  console.log(params.categoryId);
   const titleMake = () => {
     switch (params.categoryId) {
       case '566382':

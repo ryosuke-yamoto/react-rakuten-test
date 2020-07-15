@@ -15,9 +15,15 @@ interface GoodsListProps {
   url: string;
 }
 
-const SampleNextArrow: any = (props: any) => {
-  console.log(props);
-  const { className, style, onClick } = props;
+interface SampleNextArrowProps {
+  className: string;
+  style: {};
+  onClick: () => void;
+}
+
+const SampleNextArrow = ({ className, style, onClick }: any) => {
+  // console.log(props);
+  // const { className, style, onClick } = props;
   return (
     <div
       className={className}
@@ -28,7 +34,6 @@ const SampleNextArrow: any = (props: any) => {
 };
 
 const SamplePrevArrow = (props: any) => {
-  console.log(props);
   const { className, style, onClick } = props;
   return (
     <div
@@ -89,7 +94,6 @@ const GoodsList: React.FC<GoodsListProps> = ({
     );
     // return [...imgs];
   }
-  console.log(imgs);
   return (
     <div className="goods-wrap">
       <Slider {...settings} className="goods-img-wrap">

@@ -43,3 +43,10 @@ export interface Goods {
     taxFlag: number;
   };
 }
+
+export interface User {
+  name: string;
+  email: string;
+  uid: string;
+  age: string;
+}

@@ -3,8 +3,10 @@ import {
   GET_RANKING_GOODS,
   GET_RANKING_SORT_AGE,
   LOGGED_IN,
+  SIGN_UP,
+  LOGGED_IN_USER,
 } from './goodsActionConstant';
-import { Goods } from '../services/Models';
+import { Goods, User } from '../services/Models';
 
 export const getGoods = (goods: Goods[]) => ({
   type: GET_GOODS as typeof GET_GOODS,
@@ -34,8 +36,23 @@ export const loggedIn = () => ({
   },
 });
 
+export const loggedInUser = (user: User) => ({
+  type: LOGGED_IN_USER as typeof LOGGED_IN_USER,
+  payload: {
+    user: user,
+  },
+});
+
+export const signUp = () => ({
+  type: SIGN_UP as typeof SIGN_UP,
+  payload: {
+    signup: false,
+  },
+});
 export type ActionType =
   | ReturnType<typeof getGoods>
   | ReturnType<typeof getRankingGoods>
   | ReturnType<typeof getRankingSortAge>
-  | ReturnType<typeof loggedIn>;
+  | ReturnType<typeof loggedIn>
+  | ReturnType<typeof loggedInUser>
+  | ReturnType<typeof signUp>;

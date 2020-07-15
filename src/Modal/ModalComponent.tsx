@@ -10,18 +10,37 @@ import Container from 'react-bootstrap/Container';
 import { useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import { getRankingSortAge, loggedIn } from '../action/goodsAction';
+import { getRankingSortAge, loggedIn, signUp } from '../action/goodsAction';
+import { State } from '../reducer/reducer';
+import firebase from '../firebase';
+import { loggedInUser } from '../action/goodsAction';
+import { User } from '../services/Models';
 
-interface SelectAgeModalComponentProps {
-  getrankingsortage: any;
+type SelectAgeModalComponentProps = DispatchProp & StateProp;
+// {
+//   getrankingsortage: any;
+//   onHide: () => void;
+//   show: boolean;
+// }
+
+interface DispatchProp {
+  getrankingsortage: (age: string) => void;
+  loggedIn: () => void;
+  loggedInUser: (user: User) => void;
+  signUp: () => void;
+}
+
+interface StateProp {
   onHide: () => void;
-  loggedIn: any;
   show: boolean;
+  login: boolean;
+  age: string;
 }
 
 const SelectAgeModalComponent: React.FC<SelectAgeModalComponentProps> = ({
   getrankingsortage,
   loggedIn,
+  loggedInUser,
   ...props
 }) => {
   console.log(props);
@@ -29,6 +48,27 @@ const SelectAgeModalComponent: React.FC<SelectAgeModalComponentProps> = ({
   const handleClick = () => {
     props.onHide();
     getrankingsortage(age);
+    firebase.auth().onAuthStateChanged((user: any) => {
+      if (user) {
+        firebase
+          .database()
+          .ref('users/' + user.uid)
+          .push({
+            name: user.displayName,
+            email: user.email,
+            uid: user.uid,
+            age: age,
+          });
+        const loginUser = {
+          name: user.displayName,
+          email: user.email,
+          uid: user.uid,
+          age: age,
+        };
+        loggedInUser(loginUser);
+        console.log(user);
+      }
+    });
   };
   return (
     <Modal
@@ -89,16 +129,23 @@ const SelectAgeModalComponent: React.FC<SelectAgeModalComponentProps> = ({
   );
 };
 
-const mapDispatchToProps = (dispatch: Dispatch) => {
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProp => {
   return {
     getrankingsortage: (age: string) => dispatch(getRankingSortAge(age)),
     loggedIn: () => dispatch(loggedIn()),
+    loggedInUser: (user: User) => dispatch(loggedInUser(user)),
+    signUp: () => dispatch(signUp()),
   };
 };
 
-const mapStateToProps = (state: any) => {
+interface mapStateToPropsArg {
+  login: boolean;
+  age: string;
+}
+
+const mapStateToProps = (state: State): mapStateToPropsArg => {
   return {
-    login: state.logged.logIn,
+    login: state.logged.login,
     age: state.rankingSort.age,
   };
 };
@@ -111,6 +158,7 @@ export default connect(
 const SelectContentsModalComponent = ({
   getrankingsortage,
   loggedIn,
+  signUp,
   ...props
 }: any) => {
   const [contents, setContents] = useState('');
@@ -119,6 +167,7 @@ const SelectContentsModalComponent = ({
     props.onHide();
     history.push(`/category/${contents}`);
     loggedIn();
+    signUp();
   };
   return (
     <Modal

@@ -7,17 +7,41 @@ import {
   GET_RANKING_GOODS,
   GET_RANKING_SORT_AGE,
   LOGGED_IN,
+  SIGN_UP,
+  LOGGED_IN_USER,
 } from '../action/goodsActionConstant';
 import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import { User } from '../services/Models';
 
-export interface GoodsState {
+export interface State {
   Goods: {
     goods: Model.Goods[];
     rankingGoods: Model.Goods[];
-    error?: AxiosError | null;
+  };
+  rankingSort: {
+    age: string;
+  };
+  logged: {
+    login: boolean;
+    signup: boolean;
+  };
+  users: {
+    user: User;
+  };
+  _persist: {
+    version: number;
+    rehydrated: boolean;
   };
 }
+
+// export interface GoodsState {
+//   Goods: {
+//     goods: Model.Goods[];
+//     rankingGoods: Model.Goods[];
+//     error?: AxiosError | null;
+//   };
+// }
 
 interface GoodStateType {
   goods: Model.Goods[];
@@ -81,10 +105,12 @@ export const RankingSortReducer: Reducer<SortStateType, ActionType> = (
 
 export interface LoggedState {
   login: boolean;
+  signup: boolean;
 }
 
 export const LoggedInInitialState = {
   login: false,
+  signup: false,
 };
 
 export const LoggedInReducer: Reducer<LoggedState, ActionType> = (
@@ -97,6 +123,39 @@ export const LoggedInReducer: Reducer<LoggedState, ActionType> = (
         ...state,
         login: !action.payload.login,
       };
+    case SIGN_UP:
+      return {
+        ...state,
+        signup: !action.payload.signup,
+      };
+    default:
+      return state;
+  }
+};
+
+export interface UserState {
+  user: User;
+}
+
+export const UserInitialState = {
+  user: {
+    name: '',
+    email: '',
+    uid: '',
+    age: '',
+  },
+};
+
+export const UserReducer: Reducer<UserState, ActionType> = (
+  state: UserState = UserInitialState,
+  action: ActionType
+): UserState => {
+  switch (action.type) {
+    case LOGGED_IN_USER:
+      return {
+        ...state,
+        user: action.payload.user,
+      };
     default:
       return state;
   }
@@ -106,6 +165,7 @@ const reducer = combineReducers({
   Goods: GoodsReducer,
   rankingSort: RankingSortReducer,
   logged: LoggedInReducer,
+  users: UserReducer,
 });
 
 // export default reducer;

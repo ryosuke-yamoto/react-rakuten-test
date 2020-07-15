@@ -15,7 +15,6 @@ interface SearchListProps {
 }
 
 const SampleNextArrow: any = (props: any) => {
-  console.log(props);
   const { className, style, onClick } = props;
   return (
     <div
@@ -27,7 +26,6 @@ const SampleNextArrow: any = (props: any) => {
 };
 
 const SamplePrevArrow = (props: any) => {
-  console.log(props);
   const { className, style, onClick } = props;
   return (
     <div
